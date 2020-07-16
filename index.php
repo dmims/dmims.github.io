@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
   <div class="header">
     <h1>Header</h1>
     <p>My supercool header</p>
