@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-  <head><link rel="stylesheet" href="/style.css"></head>
+  <link rel="stylesheet" href="https://github.com/dmims/dmims.github.io/blob/master/style.css">
   <div class="header">
     <h1>Header</h1>
     <p>My supercool header</p>
