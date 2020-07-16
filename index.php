@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-  <link href="https://github.com/dmims/dmims.github.io/blob/master/style.css" type="text/css" rel="stylesheet">
+  <link href="./style.css" type="text/css" rel="stylesheet">
   </head>
   <div class="header">
     <h1>Header</h1>
