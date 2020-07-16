@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
-  <HEAD>
-    <LINK href="style.css" rel="stylesheet" type="text/css">
-  </HEAD>
+  <head>
+  <link href="https://github.com/dmims/dmims.github.io/blob/master/style.css" type="text/css" rel="stylesheet">
+  </head>
   <div class="header">
     <h1>Header</h1>
     <p>My supercool header</p>
