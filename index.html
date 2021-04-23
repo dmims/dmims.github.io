@@ -1,75 +1,77 @@
 <html>
 <head>
-<link href="ChessDataViz.css" rel="stylesheet">
-<style>
-	body {
-		background-color: lightgray;
-		font-family: Roboto, sans-serif;
-	}
-</style>
+<title>Chess</title>
+<link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="js/chessboard-1.0.0.min.js"></script>
 </head>
 <body>
-	<div id="heatmap-example-2" class="cdv-heatmap"></div>
-	<div class="caption">
-	  World Rapid Chess Championship 2015, checking squares of queens (how many times a queen delivered a check on a square)
-	  <br>
-	  <button id="w-btn" class="button button-primary">White Queens</button>
-	  <button id="b-btn" class="button">Black Queens</button>
-	</div>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="ChessDataViz.js"></script>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.6.7/d3-tip.min.js"></script>
+<div id="board2" style="width: 400px"></div>
+<button id="startBtn">Start Position</button>
+<button id="clearBtn">Clear Board</button>
+<button id="showPositionBtn">Show position in console</button>
+<div id ="openingType">Unknown</div>
+<div id ="openingType2">Unknown2</div>
+
+
+<select id="Openings">
+	<option value="Van't Kruijs Opening">Van't Kruijs Opening</option>
+	<option value="Sicilian Defense">Sicilian Defense</option>
+	<option value="Sicilian Defense: Bowdler Attack">Sicilian Defense: Bowdler Attack</option>
+	<option value="Scotch Game">Scotch Game</option>
+  <option value="French Defense: Knight Variation">French Defense: Knight Variation</option>
+  <option value="French Defense: Normal Variation">Scandinavian Defense: Mieses-Kotroc Variation</option>
+  <option value="Scotch Game  ">Scotch Game  </option>
+  <option value="Scandinavian Defense: Mieses-Kotroc Variation">Scandinavian Defense: Mieses-Kotroc Variation</option>
+  <option value="Queen's Pawn Game: Mason Attack">Queen's Pawn Game: Mason Attack</option>
+  <option value="Queen's Pawn Game: Chigorin Variation">Queen's Pawn Game: Chigorin Variation</option>
+  <option value="Scandinavian Defense">Scandinavian Defense</option>
+  <option value="Horwitz Defense">Horwitz Defense</option>
+  <option value="Caro-Kann Defense">Caro-Kann Defense</option>
+  <option value="Philidor Defense #3">Philidor Defense #3</option>
+  <option value="Philidor Defense #2">Philidor Defense #2</option>
+  <option value="Indian Game">Indian Game</option>
+  <option value="Italian Game: Anti-Fried Liver Defense">Italian Game: Anti-Fried Liver Defense</option>
+  <option value="Four Knights Game: Italian Variation">Four Knights Game: Italian Variation</option>
+  <option value="Modern Defense">Modern Defense</option>
+  <option value="Owen Defense">Owen Defense</option>
+  <option value="King's Pawn Game: Wayward Queen Attack">King's Pawn Game: Wayward Queen Attack</option>
+  <option value="Sicilian Defense: Old Sicilian">Sicilian Defense: Old Sicilian</option>
+</select>
+
 <script>
-	d3.json('https://ebemunk.com/chess-dataviz/data/wrc.json', function(err, data) {
-  var heatmapExample2 = new ChessDataViz.HeatMap('#heatmap-example-2', {
-    colorScale: ['cyan', 'gold'],
-    sizeScale: false,
-    accessor: {
-      color: 'w',
-      piece: 'q'
-    }
-  }, data.heatmaps.checkSquares);
+  
+var board2 = Chessboard('board2', {
+  draggable: true,
+  dropOffBoard: 'trash',
+  sparePieces: true,
+  position:'start',
+  onChange: onChange
+})
+function onChange (oldPos, newPos) {
+  var test;
+  var test2 = "test2";
+  console.log('Old position: ' + Chessboard.objToFen(oldPos))
+  console.log('New position: ' + Chessboard.objToFen(newPos))
+  var test3 = board2.position()
+  console.log(test3);
+  console.log(test4);
+  if (JSON.stringify(test3)==JSON.stringify(test4)){
+    console.log("thing true");
+  }
+  test = document.getElementById("openingType").innerHTML = Chessboard.objToFen(newPos);
+  if (test == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"){
+    document.getElementById("openingType2").innerHTML = 'test2true';
+  }
+  else{
+    document.getElementById("openingType2").innerHTML = 'test2false';
+  }
+}
 
-  var tip = d3.tip()
-    .attr('class', 'd3-tip')
-    .offset([25, -6])
-    .html(function(d) {
-      return d;
-    });
-
-  heatmapExample2.dispatch.on('mouseenter', tip.show);
-  heatmapExample2.dispatch.on('mouseleave', tip.hide);
-  heatmapExample2.dataContainer.call(tip);
-
-	var wButton = d3.select('#w-btn');
-  var bButton = d3.select('#b-btn');
-
-  wButton.on('click', function() {
-    heatmapExample2.options({
-      accessor: {
-        color: 'w',
-        piece: 'q'
-      }
-    });
-
-    wButton.classed('button-primary', true);
-    bButton.classed('button-primary', false);
-  });
-
-  bButton.on('click', function() {
-    heatmapExample2.options({
-      accessor: {
-        color: 'b',
-        piece: 'q'
-      }
-    });
-
-    wButton.classed('button-primary', false);
-    bButton.classed('button-primary', true);
-  });
-});
+$('#startBtn').on('click', board2.start)
+$('#clearBtn').on('click', board2.clear)
+// $('#showPositionBtn').on('click', clickShowPositionBtn)
 </script>
 </body>
 </html>
