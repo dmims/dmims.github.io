@@ -9,20 +9,21 @@
 
 <div id="board2" style="width: 400px"></div>
 <button id="startBtn">Start Position</button>
+<button id="Back">Back</button>
+<button id="NextMove">Next Move</button>
 <button id="clearBtn">Clear Board</button>
 <button id="showPositionBtn">Show position in console</button>
 <div id ="openingType">Unknown</div>
 <div id ="openingType2">Unknown2</div>
-
+<div id ="demo">Unknow3</div>
 
 <select id="Openings">
-	<option value="Van't Kruijs Opening">Van't Kruijs Opening</option>
+  <option value="Select Opening">Select Opening</option>
 	<option value="Sicilian Defense">Sicilian Defense</option>
 	<option value="Sicilian Defense: Bowdler Attack">Sicilian Defense: Bowdler Attack</option>
 	<option value="Scotch Game">Scotch Game</option>
   <option value="French Defense: Knight Variation">French Defense: Knight Variation</option>
   <option value="French Defense: Normal Variation">Scandinavian Defense: Mieses-Kotroc Variation</option>
-  <option value="Scotch Game  ">Scotch Game  </option>
   <option value="Scandinavian Defense: Mieses-Kotroc Variation">Scandinavian Defense: Mieses-Kotroc Variation</option>
   <option value="Queen's Pawn Game: Mason Attack">Queen's Pawn Game: Mason Attack</option>
   <option value="Queen's Pawn Game: Chigorin Variation">Queen's Pawn Game: Chigorin Variation</option>
@@ -42,6 +43,78 @@
 
 <script>
   
+  var SDopening = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
+  "rnbqkbnr/ppp1pppp/3p4/8/4P3/8/PPPP1PPP/RNBQKBNR",
+  "rnbqkbnr/ppp1pppp/3p4/8/4P3/5N2/PPPP1PPP/RNBQKB1R",
+  "rnbqkbnr/pp2pppp/3p4/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R",
+  "rnbqkbnr/pp2pppp/3p4/2p5/2B1P3/5N2/PPPP1PPP/RNBQK2R",
+  "rnbqkbnr/pp3ppp/3pp3/2p5/2B1P3/5N2/PPPP1PPP/RNBQK2R",
+  "rnbqkbnr/pp3ppp/3pp3/2p5/2B1P3/P4N2/1PPP1PPP/RNBQK2R"]
+  var SDBopening = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
+  "rnbqkbnr/pp1ppppp/8/2p5/4P3/8/PPPP1PPP/RNBQKBNR",
+  "rnbqkbnr/pp1ppppp/8/2p5/2B1P3/8/PPPP1PPP/RNBQK1NR",
+  "r1bqkbnr/pp1ppppp/2n5/2p5/2B1P3/8/PPPP1PPP/RNBQK1NR",
+  "r1bqkbnr/pp1ppppp/2n5/2p5/2B1P3/2N5/PPPP1PPP/R1BQK1NR",
+  "r1bqkbnr/pp2pppp/2np4/2p5/2B1P3/2N5/PPPP1PPP/R1BQK1NR",
+  "r1bqkbnr/pp2pppp/2np4/2p5/2B1P3/2NP4/PPP2PPP/R1BQK1NR"]
+  document.getElementById('Openings').onchange = function() {
+      numbersCopy = [];
+      if(document.getElementById("Openings").value == "Sicilian Defense"){
+        count = 0;
+        for (i = 0; i < SDopening.length; i++) {
+          numbersCopy[i] = SDopening[i];
+        }
+         document.getElementById("demo").innerHTML = "You selected: " + document.getElementById("Openings").value;
+         count = 0;
+         $('#NextMove').on('click', function () {
+           if(count >= 0 && count <= numbersCopy.length){
+            count++;
+            console.log('count1');
+            console.log(count);
+            board2.position(numbersCopy[count])
+            return;
+           }
+        })
+        $('#Back').on('click', function () {
+           if(count >= 0 && count <= numbersCopy.length){
+            count--;
+            board2.position(numbersCopy[count])
+            return;
+           }
+        })
+        $('#startBtn').on('click', clearcount)
+        return;
+      }
+      else if(document.getElementById("Openings").value == "Sicilian Defense: Bowdler Attack"){
+         document.getElementById("demo").innerHTML = "You selected: " + document.getElementById("Openings").value;
+         count = 0;
+         for (i = 0; i < SDBopening.length; i++) {
+          numbersCopy[i] = SDBopening[i];
+        }
+         $('#NextMove').on('click', function () {
+           if(count >= 0 && count <= numbersCopy.length){
+            console.log('count2');
+            console.log(count);
+              count++;
+              board2.position(numbersCopy[count])
+              return;
+           }
+        })
+        $('#Back').on('click', function () {
+           if(count > 0 && count <= numbersCopy.length){
+              count--;
+              board2.position(numbersCopy[count])
+              return;
+           }
+        })
+        $('#startBtn').on('click', clearcount)
+        return;
+      }
+  }
+  </script>
+<script>
 var board2 = Chessboard('board2', {
   draggable: true,
   dropOffBoard: 'trash',
@@ -56,10 +129,6 @@ function onChange (oldPos, newPos) {
   console.log('New position: ' + Chessboard.objToFen(newPos))
   var test3 = board2.position()
   console.log(test3);
-  console.log(test4);
-  if (JSON.stringify(test3)==JSON.stringify(test4)){
-    console.log("thing true");
-  }
   test = document.getElementById("openingType").innerHTML = Chessboard.objToFen(newPos);
   if (test == "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR"){
     document.getElementById("openingType2").innerHTML = 'test2true';
@@ -68,10 +137,21 @@ function onChange (oldPos, newPos) {
     document.getElementById("openingType2").innerHTML = 'test2false';
   }
 }
+function clickShowPositionBtn () {
+  console.log('Current position as an Object:')
+  console.log(board2.position())
 
+  console.log('Current position as a FEN string:')
+  console.log(board2.fen())
+}
+function clearcount() {
+  count = undefined;
+  return count;
+}
 $('#startBtn').on('click', board2.start)
 $('#clearBtn').on('click', board2.clear)
-// $('#showPositionBtn').on('click', clickShowPositionBtn)
+$('#clearBtn').on('click', clearcount)
+$('#showPositionBtn').on('click', clickShowPositionBtn)
 </script>
 </body>
 </html>
