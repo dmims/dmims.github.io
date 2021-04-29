@@ -1,21 +1,20 @@
 <html>
 <head>
-<title>Chess</title>
+<title>David Mims Chess Visualization</title>
 <link rel="stylesheet" href="css/chessboard-1.0.0.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="js/chessboard-1.0.0.min.js"></script>
 </head>
 <body>
 
-<div id="board2" style="width: 400px"></div>
-<button type="button" onClick="refreshPage()">ResetBoard</button>
-<button id="Back">Back</button>
-<button id="NextMove">Next Move</button>
-<button id="clearBtn">Clear Board</button>
-<button id="showPositionBtn">Show position in console</button>
+<center>
+<div id="board2" style="width: 600px"></div>
+<button type="button" onClick="refreshPage()" style = "background-color:gray; border-color: white; color:black; font-size:30px;border-radius: 12px">Reset Board</button>
+<button id="Back" style = "background-color:gray; border-color: white; color:black; font-size:30px;border-radius: 12px">Back</button>
+<button id="NextMove" style = "background-color:grey; border-color: white; color:black; font-size:30px;border-radius: 12px">Next Move</button>
 <div id ="openingType">Unknown</div>
 
-<select id = "Openings" onchange="openingFunction()">
+<select id = "Openings" onchange="openingFunction()" style ="background-color:gray; border-color: white; color:black; font-size:25px;border-radius: 12px">
   <option value="Select Opening" name ="Select Opening">Select Opening</option>
 	<option value="1" name ="Sicilian Defense">Sicilian Defense</option>
 	<option value="2" name ="Sicilian Defense: Bowdler Attack">Sicilian Defense: Bowdler Attack</option>
@@ -37,7 +36,7 @@
   <option value="18" name ="King's Pawn Game: Wayward Queen Attack">King's Pawn Game: Wayward Queen Attack</option>
   <option value="19" name ="Sicilian Defense: Old Sicilian">Sicilian Defense: Old Sicilian</option>
 </select>
-
+</center>
 <script>
   var opening1 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
@@ -79,8 +78,7 @@
   "rnbqkbnr/pppp1p1p/4p1p1/8/2PPP3/8/PP3PPP/RNBQKBNR",
   "rnbqk1nr/pppp1pbp/4p1p1/8/2PPP3/8/PP3PPP/RNBQKBNR",
   "rnbqk1nr/pppp1pbp/4p1p1/8/2PPP3/2N5/PP3PPP/R1BQKBNR"]
-  var opening6 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
-  var opening7 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening6 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/ppp1pppp/8/3P4/8/8/PPPP1PPP/RNBQKBNR",
@@ -88,7 +86,7 @@
   "rnb1kbnr/ppp1pppp/8/3q4/8/2N5/PPPP1PPP/R1BQKBNR",
   "rnb1kbnr/ppp1pppp/8/4q3/8/2N5/PPPP1PPP/R1BQKBNR",
   "rnb1kbnr/ppp1pppp/8/4q3/8/2N5/PPPPNPPP/R1BQKB1R"]
-  var opening8 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening7 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR",
   "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR",
   "rnbqkbnr/ppp1pppp/8/3p4/3P1B2/8/PPP1PPPP/RN1QKBNR",
@@ -96,7 +94,7 @@
   "rnbqkb1r/ppp1pppp/5n2/3p4/3P1B2/2N5/PPP1PPPP/R2QKBNR",
   "rn1qkb1r/ppp1pppp/5n2/3p1b2/3P1B2/2N5/PPP1PPPP/R2QKBNR",
   "rn1qkb1r/ppp1pppp/5n2/3p1b2/3P1B2/2N2N2/PPP1PPPP/R2QKB1R"]
-  var opening9 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening8 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR",
   "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR",
   "rnbqkbnr/ppp1pppp/8/3p4/3P4/2N5/PPP1PPPP/R1BQKBNR",
@@ -104,7 +102,7 @@
   "rnbqkbnr/ppp2ppp/4p3/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R",
   "r1bqkbnr/ppp2ppp/2n1p3/3p4/3P4/2N2N2/PPP1PPPP/R1BQKB1R",
   "r1bqkbnr/ppp2ppp/2n1p3/3p4/3P1B2/2N2N2/PPP1PPPP/R2QKB1R"]
-  var opening10 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening9 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/4p3/8/3P4/8/PPP1PPPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/4p3/8/3P1B2/8/PPP1PPPP/RN1QKBNR",
@@ -112,7 +110,7 @@
   "rnbqkb1r/pppp1ppp/4pn2/8/3P1B2/4P3/PPP2PPP/RN1QKBNR",
   "rnbqkb1r/pppp1ppp/4p3/3n4/3P1B2/4P3/PPP2PPP/RN1QKBNR",
   "rnbqkb1r/pppp1ppp/4p3/3n4/3P4/4P1B1/PPP2PPP/RN1QKBNR"]
-  var opening11 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening10 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pp1ppppp/2p5/8/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pp1ppppp/2p5/8/3PP3/8/PPP2PPP/RNBQKBNR",
@@ -120,7 +118,7 @@
   "rnbqkbnr/pp1p1ppp/2p1p3/8/3PP3/5N2/PPP2PPP/RNBQKB1R",
   "rnbqkbnr/pp3ppp/2p1p3/3p4/3PP3/5N2/PPP2PPP/RNBQKB1R",
   "rnbqkbnr/pp3ppp/2p1p3/3P4/3P4/5N2/PPP2PPP/RNBQKB1R"]
-  var opening12 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening11 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R",
@@ -128,7 +126,7 @@
   "rnbqkbnr/ppp2ppp/3p4/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R",
   "rnbqk1nr/ppp1bppp/3p4/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R",
   "rnbqk1nr/ppp1bppp/3p4/4p3/2BPP3/5N2/PPP2PPP/RNBQK2R"]
-  var opening13 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening12 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R",
@@ -136,7 +134,7 @@
   "rnbqkbnr/ppp2ppp/3p4/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R",
   "rnbqkbnr/pp3ppp/2pp4/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R",
   "rnbqkbnr/pp3ppp/2pp4/4p3/B3P3/5N2/PPPP1PPP/RNBQK2R"]
-  var opening14 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  var opening13 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
   "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR",
   "rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R",
@@ -144,12 +142,12 @@
   "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R",
   "r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R",
   "r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/5N1P/PPPP1PP1/RNBQK2R"]
+  var opening14 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
   var opening15 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
   var opening16 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
   var opening17 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
   var opening18 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
   var opening19 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
-  var opening20 = ["rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",]
   function openingFunction(){
     count = 0;
     var temp = undefined;
@@ -173,13 +171,13 @@
     else if(document.getElementById("Openings").value == "18"){var temp = opening18}
     else if(document.getElementById("Openings").value == "19"){var temp = opening19}
     $('#NextMove').on('click', function () {
-      if(count >= 0 && count < temp.length){
+      if(count < 7){
       count++;
       board2.position(temp[count])
       }
     })
     $('#Back').on('click', function () {
-      if(count >= 0 && count < temp.length){
+      if(count > 0){
         count--;
         board2.position(temp[count])
       }
@@ -199,21 +197,9 @@ function onChange (newPos) {
   var test3 = board2.position()
   test = document.getElementById("openingType").innerHTML = Chessboard.objToFen(newPos);
 }
-function clickShowPositionBtn () {
-  console.log('Current position as an Object:')
-  console.log(board2.position())
-
-  console.log('Current position as a FEN string:')
-  console.log(board2.fen())
-}
-function clearcount() {
-  return count=0;
-}
 function refreshPage(){
   window.location.reload();
-} 
-$('#clearBtn').on('click', board2.clear)
-$('#showPositionBtn').on('click', clickShowPositionBtn)
+}
 </script>
 </body>
 </html>
