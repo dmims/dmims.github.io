@@ -12,7 +12,7 @@
 <button type="button" onClick="refreshPage()" style = "background-color:gray; border-color: white; color:black; font-size:30px;border-radius: 12px">Reset Board</button>
 <button id="Back" style = "background-color:gray; border-color: white; color:black; font-size:30px;border-radius: 12px">Back</button>
 <button id="NextMove" style = "background-color:grey; border-color: white; color:black; font-size:30px;border-radius: 12px">Next Move</button>
-<div id ="openingType">Unknown</div>
+<div id ="openingType" style = "font-size: 30px">Unknown Win Percentage</div>
 
 <select id = "Openings" onchange="openingFunction()" style ="background-color:gray; border-color: white; color:black; font-size:25px;border-radius: 12px">
   <option value="Select Opening" name ="Select Opening">Select Opening</option>
@@ -193,25 +193,27 @@
   function openingFunction(){
     count = 0;
     var temp = undefined;
-    if(document.getElementById("Openings").value == "1"){var temp = opening1}
-    else if(document.getElementById("Openings").value == "2"){var temp = opening2}
-    else if(document.getElementById("Openings").value == "3"){var temp = opening3}
-    else if(document.getElementById("Openings").value == "4"){var temp = opening4}
-    else if(document.getElementById("Openings").value == "5"){var temp = opening5}
-    else if(document.getElementById("Openings").value == "6"){var temp = opening6}
-    else if(document.getElementById("Openings").value == "7"){var temp = opening7}
-    else if(document.getElementById("Openings").value == "8"){var temp = opening8}
-    else if(document.getElementById("Openings").value == "9"){var temp = opening9}
-    else if(document.getElementById("Openings").value == "10"){var temp = opening10}
-    else if(document.getElementById("Openings").value == "11"){var temp = opening11}
-    else if(document.getElementById("Openings").value == "12"){var temp = opening12}
-    else if(document.getElementById("Openings").value == "13"){var temp = opening13}
-    else if(document.getElementById("Openings").value == "14"){var temp = opening14}
-    else if(document.getElementById("Openings").value == "15"){var temp = opening15}
-    else if(document.getElementById("Openings").value == "16"){var temp = opening16}
-    else if(document.getElementById("Openings").value == "17"){var temp = opening17}
-    else if(document.getElementById("Openings").value == "18"){var temp = opening18}
-    else if(document.getElementById("Openings").value == "19"){var temp = opening19}
+    winpercent = 0;
+    if(document.getElementById("Openings").value == "1"){var temp = opening1; winpercent = 41.62;}
+    else if(document.getElementById("Openings").value == "2"){var temp = opening2; winpercent = 40.20;}
+    else if(document.getElementById("Openings").value == "3"){var temp = opening3; winpercent = 53.5;}
+    else if(document.getElementById("Openings").value == "4"){var temp = opening4; winpercent = 49.81;}
+    else if(document.getElementById("Openings").value == "5"){var temp = opening5; winpercent = 63.32;}
+    else if(document.getElementById("Openings").value == "6"){var temp = opening6; winpercent = 50;}
+    else if(document.getElementById("Openings").value == "7"){var temp = opening7; winpercent = 48.9;}
+    else if(document.getElementById("Openings").value == "8"){var temp = opening8; winpercent = 40.35;}
+    else if(document.getElementById("Openings").value == "9"){var temp = opening9; winpercent = 52.63;}
+    else if(document.getElementById("Openings").value == "10"){var temp = opening10; winpercent = 54.77;}
+    else if(document.getElementById("Openings").value == "11"){var temp = opening11; winpercent = 64.14;}
+    else if(document.getElementById("Openings").value == "12"){var temp = opening12; winpercent = 46.11;}
+    else if(document.getElementById("Openings").value == "13"){var temp = opening13; winpercent = 38.12;}
+    else if(document.getElementById("Openings").value == "14"){var temp = opening14; winpercent = 53.88;}
+    else if(document.getElementById("Openings").value == "15"){var temp = opening15; winpercent = 53.97;}
+    else if(document.getElementById("Openings").value == "16"){var temp = opening16; winpercent = 46.55;}
+    else if(document.getElementById("Openings").value == "17"){var temp = opening17; winpercent = 45.23;}
+    else if(document.getElementById("Openings").value == "18"){var temp = opening18; winpercent = 45.12;}
+    else if(document.getElementById("Openings").value == "19"){var temp = opening19; winpercent = 37.73;}
+    document.getElementById("openingType").innerHTML = "White will win " + winpercent + "% of the time";
     $('#NextMove').on('click', function () {
       if(count < 7){
       count++;
@@ -236,8 +238,6 @@ var board2 = Chessboard('board2', {
 })
 function onChange (newPos) {
   console.log('New position: ' + Chessboard.objToFen(newPos))
-  var test3 = board2.position()
-  test = document.getElementById("openingType").innerHTML = Chessboard.objToFen(newPos);
 }
 function refreshPage(){
   window.location.reload();
