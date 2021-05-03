@@ -8,10 +8,14 @@
 <body>
 
 <center>
+<p style="font-size: 25px;">Welcome to my Data Visualization! <br /> 
+        Here you will be able to choose an opening and play through either move by move, or you can skip ahead 5 turns! <br />
+        Max turns for each opening is 6 moves. After you select an opening it will show you White's win percentage using that move!</p>
 <div id="board2" style="width: 600px"></div>
 <button type="button" onClick="refreshPage()" style = "background-color:gray; border-color: white; color:black; font-size:30px;border-radius: 12px">Reset Board</button>
 <button id="Back" style = "background-color:gray; border-color: white; color:black; font-size:30px;border-radius: 12px">Back</button>
 <button id="NextMove" style = "background-color:grey; border-color: white; color:black; font-size:30px;border-radius: 12px">Next Move</button>
+<button id="Advance" style = "background-color:grey; border-color: white; color:black; font-size:30px;border-radius: 12px">Advance 5 moves</button>
 <div id ="openingType" style = "font-size: 30px">Unknown Win Percentage</div>
 
 <select id = "Openings" onchange="openingFunction()" style ="background-color:gray; border-color: white; color:black; font-size:25px;border-radius: 12px">
@@ -223,6 +227,12 @@
     $('#Back').on('click', function () {
       if(count > 0){
         count--;
+        board2.position(temp[count])
+      }
+    })
+    $('#Advance').on('click', function () {
+      if(count < 7){
+        count+=5;
         board2.position(temp[count])
       }
     })
